@@ -8,7 +8,7 @@ const CharacterDetail = (props) => {
         title={`Foto de ${props.contactData.name}`}
       />
       <h4>{props.contactData.name}</h4>
-      <p>{props.contactData.especies}</p>
+      <p>{props.contactData.species}</p>
     </>
   );
 };

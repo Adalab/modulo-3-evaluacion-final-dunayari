@@ -16,6 +16,10 @@ function App() {
     });
   }, []);
 
+  const handleChangeSearchName = (ev) => {
+    setSearchName(ev.currentTarget.value);
+  };
+
   const filteredCharacter = character.filter((contact) =>
     contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
   );
@@ -26,24 +30,19 @@ function App() {
         <header className="header">
           <img
             className="header_image"
-            src="https://help.redbubble.com/hc/article_attachments/360002309526/Rick_and_Morty_-_logo__English_.png"
+            src="//help.redbubble.com/hc/article_attachments/360002309526/Rick_and_Morty_-_logo__English_.png"
             alt="img"
           />
         </header>
         <section>
-          <form action="">
-            <input type="text" name="name" id="name" />
-          </form>
+          <Filters
+            searchName={searchName}
+            handleChangeSearchName={handleChangeSearchName}
+          />
         </section>
         <section>
           <CharacterList character={filteredCharacter} />
         </section>
-        <section>
-          <CharacterList character={character} />
-        </section>
-        <ul className="cards">
-          <li className="card"></li>
-        </ul>
       </div>
     </>
   );
