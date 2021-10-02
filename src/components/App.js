@@ -1,39 +1,49 @@
 import '../styles/App.scss';
 import { useEffect, useState } from 'react';
 import callToApi from '../services/api';
+import CharacterList from './CharacterList';
+import Filters from './Filters';
+import CharacterDetail from './CharacterDetail';
 
 function App() {
-  ////Variables de estado////
   const [character, setCharacter] = useState([]);
+  const [searchName, setSearchName] = useState('');
 
   useEffect(() => {
-    callToApi().then((resp) => {
-      setCharacter(resp);
-      console.log(resp);
+    callToApi().then((initialCharacter) => {
+      setCharacter(initialCharacter);
+      console.log(initialCharacter);
     });
   }, []);
 
-  const renderCharacter = () => {
-    return character.map((character, i) => {
-      return (
-        <li key={i}>
-          <img src={character.img} alt="img" className="img" />
-          <p>{character.name}</p>
-          <p>{character.species}</p>
-        </li>
-      );
-    });
-  };
+  const filteredCharacter = character.filter((contact) =>
+    contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
+  );
+
   return (
     <>
       <div>
-        <header>
-          <img src="../images/Rick_and_Morty.png" alt="img" />
+        <header className="header">
+          <img
+            className="header_image"
+            src="https://help.redbubble.com/hc/article_attachments/360002309526/Rick_and_Morty_-_logo__English_.png"
+            alt="img"
+          />
         </header>
-        <form action="">
-          <input type="text" name="name" id="name" />
-        </form>
-        <ul>{renderCharacter()}</ul>
+        <section>
+          <form action="">
+            <input type="text" name="name" id="name" />
+          </form>
+        </section>
+        <section>
+          <CharacterList character={filteredCharacter} />
+        </section>
+        <section>
+          <CharacterList character={character} />
+        </section>
+        <ul className="cards">
+          <li className="card"></li>
+        </ul>
       </div>
     </>
   );

@@ -1,6 +1,4 @@
-// Fichero src/services/api.js
 const callToApi = () => {
-  // Llamamos al API
   return fetch(
     'https://raw.githubusercontent.com/Adalab/rick-y-morty/master/data/rick-y-morty.json'
   )
@@ -8,6 +6,7 @@ const callToApi = () => {
     .then((response) => {
       const characterResult = response.results.map((result) => {
         return {
+          id: result.id,
           img: result.image,
           name: result.name,
           species: result.species,
