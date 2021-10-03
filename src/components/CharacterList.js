@@ -1,9 +1,9 @@
-import CharacterDetail from './CharacterDetail';
+import CharacterCard from './CharacterDetail';
 
 const CharacterList = (props) => {
-  const html = props.character.map((contactData, id) => (
-    <li className="card" key={id}>
-      <CharacterDetail contactData={contactData} />
+  const html = props.character.map((contactData) => (
+    <li className="card" key={contactData.id}>
+      <CharacterCard contactData={contactData} />
     </li>
   ));
 

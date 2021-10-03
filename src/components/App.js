@@ -4,6 +4,7 @@ import callToApi from '../services/api';
 import CharacterList from './CharacterList';
 import Filters from './Filters';
 import CharacterDetail from './CharacterDetail';
+import { Route, Switch, useRouteMatch } from 'react-router';
 
 function App() {
   const [character, setCharacter] = useState([]);
@@ -20,6 +21,13 @@ function App() {
     setSearchName(ev.currentTarget.value);
   };
 
+  const routeData = useRouteMatch('/contactData/:id');
+  const contactId = routeData !== null ? routeData.params.id : '';
+
+  const selectedContact = character.find(
+    (contact) => contact.id === parseInt(contactId)
+  );
+
   const filteredCharacter = character.filter((contact) =>
     contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
   );
@@ -34,15 +42,28 @@ function App() {
             alt="img"
           />
         </header>
-        <section>
-          <Filters
-            searchName={searchName}
-            handleChangeSearchName={handleChangeSearchName}
-          />
-        </section>
-        <section>
-          <CharacterList character={filteredCharacter} />
-        </section>
+        <Switch>
+          <Route path="/contactData/:id">
+            <section>
+              <CharacterDetail contactData={selectedContact} />
+            </section>
+          </Route>
+
+          <Route exact path="/">
+            <section>
+              <Filters
+                searchName={searchName}
+                handleChangeSearchName={handleChangeSearchName}
+              />
+            </section>
+            <section>
+              <CharacterList character={filteredCharacter} />
+            </section>
+          </Route>
+          <Route>
+            <section>¡Vaya! Página errónea.</section>
+          </Route>
+        </Switch>
       </div>
     </>
   );
