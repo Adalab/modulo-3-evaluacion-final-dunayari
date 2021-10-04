@@ -9,16 +9,20 @@ import { Route, Switch, useRouteMatch } from 'react-router';
 function App() {
   const [character, setCharacter] = useState([]);
   const [searchName, setSearchName] = useState('');
+  const [searchSpecies, setSearchSpecies] = useState('Human');
 
   useEffect(() => {
-    callToApi().then((initialCharacter) => {
+    callToApi(searchName).then((initialCharacter) => {
       setCharacter(initialCharacter);
       console.log(initialCharacter);
     });
-  }, []);
+  }, [searchName]);
 
   const handleChangeSearchName = (ev) => {
     setSearchName(ev.currentTarget.value);
+  };
+  const handleChangeSearchSpecies = (ev) => {
+    setSearchSpecies(ev.target.value);
   };
 
   const routeData = useRouteMatch('/contactData/:id');
@@ -28,9 +32,11 @@ function App() {
     (contact) => contact.id === parseInt(contactId)
   );
 
-  const filteredCharacter = character.filter((contact) =>
-    contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
-  );
+  const filteredCharacter = character
+    .filter((contact) =>
+      contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
+    )
+    .filter((type) => type.species);
 
   return (
     <>
@@ -54,6 +60,8 @@ function App() {
               <Filters
                 searchName={searchName}
                 handleChangeSearchName={handleChangeSearchName}
+                searchSpecies={searchSpecies}
+                handleChangeSearchSpecies={handleChangeSearchSpecies}
               />
             </section>
             <section>
