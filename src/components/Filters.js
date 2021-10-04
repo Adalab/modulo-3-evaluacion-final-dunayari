@@ -21,11 +21,12 @@ const Filters = (props) => {
         className="inputs"
         name="species"
         id="species"
-        checked={props.searchSpecies}
+        value={props.searchSpecies}
         onChange={props.handleChangeSearchSpecies}
       >
-        <option value="human">Human</option>
-        <option value="alien">Alien</option>
+        <option value="Human">Human</option>
+        <option value="Alien">Alien</option>
+        <option value="all">Todos</option>
       </select>
     </form>
   );

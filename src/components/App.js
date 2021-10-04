@@ -9,7 +9,7 @@ import { Route, Switch, useRouteMatch } from 'react-router';
 function App() {
   const [character, setCharacter] = useState([]);
   const [searchName, setSearchName] = useState('');
-  const [searchSpecies, setSearchSpecies] = useState('Human');
+  const [searchSpecies, setSearchSpecies] = useState('all');
 
   useEffect(() => {
     callToApi(searchName).then((initialCharacter) => {
@@ -36,7 +36,9 @@ function App() {
     .filter((contact) =>
       contact.name.toLocaleLowerCase().includes(searchName.toLocaleLowerCase())
     )
-    .filter((type) => type.species);
+    .filter(
+      (type) => searchSpecies === 'all' || searchSpecies === type.species
+    );
 
   return (
     <>
