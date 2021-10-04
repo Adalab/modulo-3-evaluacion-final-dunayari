@@ -10,13 +10,12 @@
 
 .character-container {
   list-style: none;
-  width: 200px;
+  width: 185px;
   height: 300px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-
   color: purple;
 }
 
@@ -28,8 +27,9 @@
 .card_detail {
   list-style: none;
   background-color: bisque;
-  box-sizing: border-box;
+  width: 185px;
 }
 .text-style {
   background-color: bisque;
+  margin-bottom: 2px;
 }

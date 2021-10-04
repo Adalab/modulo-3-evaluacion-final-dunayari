@@ -71,7 +71,7 @@ function App() {
             </section>
           </Route>
           <Route>
-            <section>¡Vaya! Página errónea.</section>
+            <section>El personaje que buscas no existe</section>
           </Route>
         </Switch>
       </div>

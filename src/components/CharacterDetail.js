@@ -19,9 +19,7 @@ const CharacterDetail = (props) => {
           <li className="text-style">Especie:{props.contactData.species}</li>
           <li className="text-style">Origen:{props.contactData.origin}</li>
           <li className="text-style">Episodios:{props.contactData.episode}</li>
-          <li className="text-style">
-            ¿Está vivo o muerto?:{props.contactData.status}
-          </li>
+          <li className="text-style">Estatus:{props.contactData.status}</li>
         </div>
       </ul>
     </section>
